@@ -500,7 +500,7 @@ def draw_oval(canvas, midpoint, radius, color):
     bottom = y + radius
     canvas.create_oval(left, top, right, bottom, fill=color)
 
-
+ #
 def move_canv():
     dx0 = -1 * round((x_0 - 3.815) * (480 / 262))
     dy90 = round((x_90 - 3.815) * (480 / 262))
@@ -519,7 +519,7 @@ def move_canv():
     canvas.move(kile270, 0, dy270)
     canvas.move(lin270, 0, dy270)
 
-
+#Denne kode definere
 def indstil_canv():
     #canvas.move(kile0, -7, 0)
     #canvas.move(lin0, -7, 0)
@@ -530,33 +530,42 @@ def indstil_canv():
     #canvas.move(kile270, 0, -7)
     #canvas.move(lin270, 0, -7)
 
+    #Denne kode skaber et animationsloop som bevæger variblerne Klie0 og lin0 i små steps
     n = 0
     while n < 7:
         n += 1
         canvas.move(kile0, -1, 0)
         canvas.move(lin0, -1, 0)
-        sleep(0.2)
+        sleep(0.2)  #Denne linje skaber et delay på 0.2 sekunder efter hver bevægelse
+
+    # Denne kode skaber et animationsloop som bevæger variblerne Klie90 og lin90 i små steps
     n = 0
     while n < 7:
         n += 1
         canvas.move(kile90, 0, 1)
         canvas.move(lin90, 0, 1)
-        sleep(0.2)
+        sleep(0.2)  #Denne linje skaber et delay på 0.2 sekunder efter hver bevægelse
+
+    # Denne kode skaber et animationsloop som bevæger variblerne Klie180 og lin180 i små steps
     n = 0
     while n < 7:
         n += 1
         canvas.move(kile180, 1, 0)
         canvas.move(lin180, 1, 0)
-        sleep(0.2)
+        sleep(0.2)  #Denne linje skaber et delay på 0.2 sekunder efter hver bevægelse
+
+
+    # Denne kode skaber et animationsloop som bevæger variblerne Klie270 og lin270 i små steps
     n = 0
     while n < 7:
         n += 1
         canvas.move(kile270, 0, -1)
         canvas.move(lin270, 0, -1)
-        sleep(0.2)
+        sleep(0.2)  #Denne linje skaber et delay på 0.2 sekunder efter hver bevægelse
 
-
+#Koden under bliver brugt til at skaber en brugergrænseoverflade, defineret under navnet GUI
 def gui():
+    #En masse varibeler bliver globalt defineret
     global frame1
     global count
     global labelr0
@@ -578,101 +587,123 @@ def gui():
     global lin180
     global lin270
 
+    #BrugerGrænseOverfladen bliver sat til dark mode
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("dark-blue")
 
+    #BrugerGrænseOverfladen bliver tildelt en pixel størrelse på (1230x550)
     window = ctk.CTk()
     window.geometry("1230x550")
 
+    #Der bliver defineret et icon som bliver resizet til en spcifik størrelse.
     cam = Image.open(r"C:\Users\Juliu\OneDrive\Skrivebord\MP3\icons\camera-icon.png")
     cam = cam.resize((28, 28), Image.ANTIALIAS)
     tk_cam = ImageTk.PhotoImage(cam)
 
+    # Der bliver defineret et icon som bliver resizet til en spcifik størrelse.
     stepper = Image.open(r"C:\Users\Juliu\OneDrive\Skrivebord\MP3\icons\stepper.png")
     stepper = stepper.resize((20, 20), Image.ANTIALIAS)
     tk_stepper = ImageTk.PhotoImage(stepper)
 
+    # Der bliver defineret et icon som bliver resizet til en spcifik størrelse.
     send = Image.open(r"C:\Users\Juliu\OneDrive\Skrivebord\MP3\icons\send.png")
     send = send.resize((20, 20), Image.ANTIALIAS)
     tk_send = ImageTk.PhotoImage(send)
 
+    # Der bliver defineret et icon som bliver resizet til en spcifik størrelse.
     cali = Image.open(r"C:\Users\Juliu\OneDrive\Skrivebord\MP3\icons\calibrate.png")
     cali = cali.resize((20, 20), Image.ANTIALIAS)
     tk_cali = ImageTk.PhotoImage(cali)
 
+    # Der bliver defineret et icon som bliver resizet til en spcifik størrelse.
     excl = Image.open(r"C:\Users\Juliu\OneDrive\Skrivebord\MP3\icons\excel.png")
     excl = excl.resize((20, 20), Image.ANTIALIAS)
     tk_excl = ImageTk.PhotoImage(excl)
     #count = ctk.IntVar()
     #count.set(0)
 
+    #Dette stykke kode bliver brugt til at skabe 6 frames til at oganisere layoutet i BrugerGrænseOverfladen.
+    #frame er til knapperne
     frame = ctk.CTkFrame(master=window, width=300, height=300)
     frame.grid(row=0, column=0, pady=5, padx=5)
 
+    #frame1 er til det polære plot
     frame1 = ctk.CTkFrame(master=window, width=500, height=500)
     frame1.grid(row=0, column=1, pady=5, padx=5)
 
+    #frame2 er til vinkel kolonnen
     frame2 = ctk.CTkFrame(master=window, width=250, height=480)
     frame2.grid(row=0, column=2, pady=5, padx=5)
 
+    #frame3 er til Radius kolonnen
     frame3 = ctk.CTkFrame(master=window, width=250, height=480)
     frame3.grid(row=0, column=3, pady=5, padx=5)
 
+    #frame4 er til runhedssøjlen under det polære plot
     frame4 = ctk.CTkFrame(master=window)
     frame4.grid(row=1, column=1)
 
+    #frame5 er til værktøjets projektion
     frame5 = ctk.CTkFrame(master=window, width=500, height=500)
     frame5.grid(row=0, column=4)
 
+    #Her bliver der skabt en knap funktion som gemmer data, som gør brug af iconnet gemt fra tidligere
     button = ctk.CTkButton(master=frame,
                            text="Gem Data",
                            font=("Times New Roman", 15),
                            fg_color="dimgray",
                            image=tk_excl,
                            command=click)
+    button.grid(row=0, column=0, pady=5,padx=5)  # Denne linje beskriver hvilken række og kolonne knappen og teksten bliver sat.
 
+    # Her bliver der skabt en knap funktion som skaber et polært plot, som gør brug af iconnet gemt fra tidligere
     button1 = ctk.CTkButton(master=frame,
                             text="Polar Plot",
                             font=("Times New Roman", 15),
                             command=polar_plot,
                             fg_color="dimgray")
+    button1.grid(row=1, column=0, pady=5, padx=5)   #Denne linje beskriver hvilken række og kolonne knappen og teksten bliver sat.
 
-    button.grid(row=0, column=0, pady=5, padx=5)
-    button1.grid(row=1, column=0, pady=5, padx=5)
-
+    # Her bliver der skabt en knap funktion som sender micro-steps beregningerne til SBC'en,
+    # som gør brug af iconnet gemt fra tidligere
     button2 = ctk.CTkButton(master=frame,
                             font=("Times New Roman", 15),
                             text="Send",
                             image=tk_send,
                             fg_color="dimgray",
                             command=send_data)
-    button2.grid(row=2, column=0, pady=5, padx=5)
+    button2.grid(row=2, column=0, pady=5, padx=5)   #Denne linje beskriver hvilken række og kolonne knappen og teksten bliver sat.
 
+    # Her bliver der skabt en knap funktion som sender kommandoen med at justere de microsteps som er beregnet på motoren,
+    # som gør brug af iconnet gemt fra tidligere
     button3 = ctk.CTkButton(master=frame,
                             font=("Times New Roman", 15),
                             text="Justere",
                             image=tk_stepper,
                             fg_color="dimgray",
                             command=justering)
-    button3.grid(row=3, column=0, pady=5, padx=5)
+    button3.grid(row=3, column=0, pady=5, padx=5)   #Denne linje beskriver hvilken række og kolonne knappen og teksten bliver sat.
 
+    # Her bliver der skabt en knap funktion som bliver brugt til at kalibrere kameraet,
+    # som gør brug af iconnet gemt fra tidligere
     button4 = ctk.CTkButton(master=frame,
                             font=("Times New Roman", 15),
                             text="Calibrer",
                             image=tk_cali,
                             fg_color="dimgray",
                             command=calibrer)
-    button4.grid(row=4, column=0, pady=5, padx=5)
+    button4.grid(row=4, column=0, pady=5, padx=5)   #Denne linje beskriver hvilken række og kolonne knappen og teksten bliver sat.
 
+    # Her bliver der skabt en knap funktion som aktivere kameraet, som gør brug af iconnet gemt fra tidligere
     button5 = ctk.CTkButton(master=frame,
                             font=("Times New Roman", 15),
                             text="Camera",
                             fg_color="dimgray",
                             image=tk_cam,
                             command=cam_activate)
-    button5.grid(row=5, column=0, pady=5, padx=5)
+    button5.grid(row=5, column=0, pady=5, padx=5)   #Denne linje beskriver hvilken række og kolonne knappen og teksten bliver sat.
 
-
+    #Denne kode bliver brugt til at skabe tekst der skal stå på en kolonne
     labelv = ctk.CTkLabel(master=frame2, text="Vinkel")
     label0 = ctk.CTkLabel(master=frame2, text='0°')
     label45 = ctk.CTkLabel(master=frame2, text='45°')
@@ -683,6 +714,7 @@ def gui():
     label270 = ctk.CTkLabel(master=frame2, text='270°')
     label315 = ctk.CTkLabel(master=frame2, text='315°')
 
+    #Denne kode bliver brugt til at indsætte tekst labelerne skabt over ind på forskellige rækker
     labelv.grid(row=0, column=0, pady=10, padx=10)
     label0.grid(row=1, column=0, pady=10, padx=10)
     label45.grid(row=2, column=0, pady=10, padx=10)
@@ -694,6 +726,7 @@ def gui():
     label270.grid(row=8, column=0, pady=10, padx=10)
     label315.grid(row=9, column=0, pady=10, padx=10)
 
+    # Denne kode bliver brugt til at lable radiusen fra forskellige vinker der skal stå på en kolonne
     labelr = ctk.CTkLabel(master=frame3, text="Radius")
     labelr0 = ctk.CTkLabel(master=frame3, text=f"")
     labelr45 = ctk.CTkLabel(master=frame3, text=f"")
@@ -704,6 +737,7 @@ def gui():
     labelr270 = ctk.CTkLabel(master=frame3, text=f'')
     labelr315 = ctk.CTkLabel(master=frame3, text=f'')
 
+    # Denne kode indsætter radius værdierne på rækkerne i en kolonne
     labelr.grid(row=0, column=0, pady=10, padx=10)
     labelr0.grid(row=1, column=0, pady=10, padx=10)
     labelr45.grid(row=2, column=0, pady=10, padx=10)
@@ -715,20 +749,24 @@ def gui():
     labelr270.grid(row=8, column=0, pady=10, padx=10)
     labelr315.grid(row=9, column=0, pady=10, padx=10)
 
+    #Denne kode bruges til at skabe en tabel til rundhed hvori en beregnet rundhed bliver sat i
     labelRundhed = ctk.CTkLabel(master=frame4, text=f"Rundhed:")
     labelRundhed.grid(row=0, column=0, pady=10, padx=10)
 
+    #Denne kode definere varibelen canvas til at være frame5 og giver den dimensionerne 500x500
     canvas = ctk.CTkCanvas(frame5, width=500, height=500, bg='grey25')
-
     canvas.pack(padx=10, pady=10)
 
+
+    #Koden under tegner en oval på et lærred, Ovalen beskriver værktøjet
     draw_oval(canvas=canvas, midpoint=(250, 250), radius=240, color="grey70")
     draw_oval(canvas=canvas, midpoint=(250, 250), radius=194, color="grey38")
     canvas.create_rectangle(227, 42, 273, 458, fill="grey70")
     canvas.create_rectangle(42, 227, 458, 273, fill="grey70")
     draw_oval(canvas=canvas, midpoint=(250, 250), radius=68, color="grey25")
+    #Koden under skaber 4 rectangler på placeringerne 0°,90°,180°,270° indenfor en oval.
+    # disse rectangler bliver defineret som kiler, og bliver brugt til at vise kilens placering i værktøjet.
     kile0 = canvas.create_rectangle(337, 227, 458, 273, fill="grey", tags='draggable')
-
     position0 = (470, 250)
     canvas.create_text(position0, text="0°", font=("Times New Roman", 12))
     kile90 = canvas.create_rectangle(227, 42, 273, 163, fill="grey")
@@ -741,34 +779,50 @@ def gui():
     position270 = (250, 470)
     canvas.create_text(position270, text="270°", font=("Times New Roman", 12))
 
+    #Denne kode skaber en stiplede linje på lærredet fra start koordinaterne til slut koordinaterne
     start0 = (391, 220)
     end0 = (391, 280)
     line0 = canvas.create_line(start0, end0, dash=(5, 2))
 
+    #Denne kode skaber en stiplede linje på lærredet fra start koordinaterne til slut koordinaterne
     start90 = (220, 109)
     end90 = (280, 109)
     line90 = canvas.create_line(start90, end90, dash=(5, 2))
 
+    #Denne kode skaber en stiplede linje på lærredet fra start koordinaterne til slut koordinaterne
     start180 = (109, 220)
     end180 = (109, 280)
     line180 = canvas.create_line(start180, end180, dash=(5, 2))
 
+    #Denne kode skaber en stiplede linje på lærredet fra start koordinaterne til slut koordinaterne
     start270 = (220, 391)
     end270 = (280, 391)
     line270 = canvas.create_line(start270, end270, dash=(5, 2))
 
+    #Denne kode skaber en cyan farvet stiplede linje på lærredet fra start koordinaterne til slut koordinaterne.
+    #Koden beskriver en linje der beskriver midten af kilen,-
+    # hvilket bliver brugt til at vise hvorlangt kilen er fra dens neutral akse
     start0 = (398, 220)
     end0 = (398, 280)
     lin0 = canvas.create_line(start0, end0, dash=(5, 2), fill="cyan2")
 
+    # Denne kode skaber en cyan farvet stiplede linje på lærredet fra start koordinaterne til slut koordinaterne.
+    # Koden beskriver en linje der beskriver midten af kilen,-
+    # hvilket bliver brugt til at vise hvorlangt kilen er fra dens neutral akse
     start90 = (220, 102)
     end90 = (280, 102)
     lin90 = canvas.create_line(start90, end90, dash=(5, 2), fill="cyan2")
 
+    # Denne kode skaber en cyan farvet stiplede linje på lærredet fra start koordinaterne til slut koordinaterne.
+    # Koden beskriver en linje der beskriver midten af kilen,-
+    # hvilket bliver brugt til at vise hvorlangt kilen er fra dens neutral akse
     start180 = (102, 220)
     end180 = (102, 280)
     lin180 = canvas.create_line(start180, end180, dash=(5, 2), fill="cyan2")
 
+    # Denne kode skaber en cyan farvet stiplede linje på lærredet fra start koordinaterne til slut koordinaterne.
+    # Koden beskriver en linje der beskriver midten af kilen,-
+    # hvilket bliver brugt til at vise hvorlangt kilen er fra dens neutral akse
     start270 = (220, 398)
     end270 = (280, 398)
     lin270 = canvas.create_line(start270, end270, dash=(5, 2), fill="cyan2")
@@ -776,15 +830,16 @@ def gui():
     #canvas.tag_bind('draggable', '<ButtonPress-1>', on_press)
     #canvas.tag_bind('draggable', '<B1-Motion>', on_drag)
 
+    #Denne kode tilader GUI til at give en respons til bruger-interaktion
     window.mainloop()
 
+#Koden under skaber threads, som bliver kørt samtidigt
+if __name__ == "__main__":      #Der bliver tjekket om scriptet bliver kørt som hovedprogram
+    p2 = th.Thread(target=gui)      #Der bliver skabt en ny thread kaldt (p2) der tildeler "target" variebelen til gui funktionen
+    p3 = th.Thread(target=con)      #Der bliver skabt en ny thread kaldt (p3) der tildeler "target" variebelen til con funktionen
 
-if __name__ == "__main__":
-    p2 = th.Thread(target=gui)
-    p3 = th.Thread(target=con)
+    p2.start()      #Dette starter p2 threaden, som blev skabt i linjerne over
+    p3.start()      #Dette starter p3 threaden, som blev skabt i linjerne over
 
-    p2.start()
-    p3.start()
-
-    sleep(3)
+    sleep(3)        #Denne kommando pauser main threaden i 3 sekunder, hvilket tilader at gui og con threadende kan starte med at initialisere
     indstil_canv()
